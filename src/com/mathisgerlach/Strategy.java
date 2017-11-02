@@ -2,19 +2,17 @@ package com.mathisgerlach;
 
 public class Strategy {
 
-    private boolean[] winningStrategyTable;
     private final int MATCHES_DRAWING_MAX = 3;
-    private static final int MATCHES_LIMIT = 30;
 
     public int getMatches(int matchesRemaining) {
-        return getMatchesFromStrategyTable(matchesRemaining);
+        return getMatchesWithStrategy( matchesRemaining );
     }
 
-    public int getStartingNumber(int matchesTotal ) {
-        return getStartingNumberFromStrategyTable( matchesTotal );
+    public int getStartingMatches(int matchesLimit ) {
+        return getRandomMatchesWithStrategy( matchesLimit );
     }
 
-    private int getStartingNumberFromStrategyTable(int matchesMax) {
+    private int getRandomMatchesWithStrategy(int matchesMax) {
         int result;
         do{
             result = getRandomInt(MATCHES_DRAWING_MAX, matchesMax );
@@ -23,7 +21,7 @@ public class Strategy {
         return result;
     }
 
-    private int getMatchesFromStrategyTable( int matchesRemaining ) {
+    private int getMatchesWithStrategy( int matchesRemaining ) {
         int number = 1;
         for (int i = number; i <= MATCHES_DRAWING_MAX; i++) {
             int numberToCheck = matchesRemaining - i;
@@ -34,29 +32,8 @@ public class Strategy {
         return getRandomInt(1, 3);
     }
 
-    private void preparewinningStrategyTable( int tableSize ) {
-
-        winningStrategyTable = new boolean[tableSize + 1];
-        winningStrategyTable[0] = false;
-        winningStrategyTable[1] = false;
-        winningStrategyTable[2] = true;
-        winningStrategyTable[3] = true;
-
-        int i = MATCHES_DRAWING_MAX;
-
-        while (i < tableSize) {
-            i = i + 1;
-
-            if( winningStrategyTable[i-3] == winningStrategyTable[i-2] == winningStrategyTable[i-1] == true ){
-                winningStrategyTable[i] = false;
-            } else {
-                winningStrategyTable[i] = true;
-            }
-        }
-    }
-
     private boolean isWinningNumber( int number ) {
-        return !winningStrategyTable[number];
+       return  (number - 1)  % 4 == 0;
     }
 
     private int getRandomInt(int min, int max) {
@@ -64,6 +41,5 @@ public class Strategy {
     }
 
     public Strategy() {
-        preparewinningStrategyTable(MATCHES_LIMIT);
     }
 }

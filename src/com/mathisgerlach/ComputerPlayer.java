@@ -11,7 +11,7 @@ public class ComputerPlayer extends Player {
 
     @Override
     int getMatchesTotal(int matchesLimit) {
-        int totalMatches = strategy.getStartingNumber(matchesLimit);
+        int totalMatches = strategy.getStartingMatches( matchesLimit );
         System.out.println(this.getName() + " chose " + totalMatches + " matches for the current game.");
         return totalMatches;
     }
