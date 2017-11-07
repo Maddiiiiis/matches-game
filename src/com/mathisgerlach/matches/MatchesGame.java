@@ -1,4 +1,4 @@
-package com.mathisgerlach;
+package com.mathisgerlach.matches;
 
 public class MatchesGame {
     private int remainingMatches;
