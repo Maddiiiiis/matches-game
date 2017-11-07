@@ -1,0 +1,31 @@
+<project name="MatchesGame" default="dist" basedir=".">
+
+    <property name="title" value="Streichholzspiel"/>
+    <!-- Versioning with the build number -->
+    <property name="VERSION" value="1.0."/>
+    <property name="srcFolder" location="src"/>
+    <property name="buildFolder" value="build"/>
+    <property name="distFolder" value="dist"/>
+
+    <target name="init">
+        <buildnumber/>
+        <!-- create new build directory -->
+        <mkdir dir="${buildFolder}"/>
+        <mkdir dir="${distFolder}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${srcFolder}" destdir="${buildFolder}" includeantruntime="false" />
+    </target>
+
+    <target name ="dist" depends="clean, compile" description="Dist task">
+        <jar jarfile="${distFolder}/${title}-${VERSION}${build.number}.jar" basedir="${buildFolder}"/>
+    </target>
+
+    <target name="clean"
+            description="delete generated directories and files" >
+        <delete dir="${buildFolder}"/>
+        <delete dir="${distFolder}"/>
+    </target>
+
+</project>

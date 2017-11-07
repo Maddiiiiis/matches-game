@@ -1,4 +1,4 @@
-package com.mathisgerlach;
+package com.mathisgerlach.matches;
 
 public class MatchesGame {
     private int remainingMatches;
@@ -64,7 +64,6 @@ public class MatchesGame {
 
     private void drawMatches(Player player){
         int matchesToDraw;
-
         do {
             matchesToDraw = player.getMatchesToDraw( remainingMatches );
         } while ( !isValidMove( matchesToDraw ) );
